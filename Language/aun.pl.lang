@@ -2,6 +2,7 @@
 app_name='Arch-Update'
 app_name_male='arch-update'
 app_name_styl="\E[33;1m[$app_name $version]\033[0m"
+aun_remove="Usuń aplikację $app_name ze swojego komputera."
 root_fail='Program wymaga uprawnień administratora.'
 instalation_close='Instalacja zakończona.'
 install_file="Zainstalować program $app_name? [T/n]"
