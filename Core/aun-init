@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#Copyright © 2015 Damian Majchrzak (DamiaX)
+#http://damiax.github.io/AuN/
+
+arch-update;
+
+for (( i=1; $i <= 2; )) ; do
+sleep 3600;
+arch-update;
+done;
