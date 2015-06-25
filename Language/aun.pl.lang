@@ -1,0 +1,30 @@
+#Copyright © 2015 Damian Majchrzak (DamiaX)
+app_name='Arch-Update'
+app_name_male='arch-update'
+app_name_styl="\E[33;1m[$app_name $version]\033[0m"
+root_fail='Program wymaga uprawnień administratora.'
+instalation_close='Instalacja zakończona.'
+install_file="Zainstalować program $app_name? [T/n]"
+install_ok='Instalacja zakończona!'
+run='Uruchomienie programu:'
+author='Autor programu:'
+name='Damian Majchrzak (DamiaX).'
+name_author="\E[33;1m$author\033[0m $name"
+new_version="Sprawdzanie wersji $app_name..."
+download_new="Pobieranie nowszej wersji programu $app_name..."
+install_wrong='Kopiowanie plików nie powiodło się...'
+instalation_error='Aktualizacja systemu nie powiodła się...'
+answer_remove="Czy na pewno chcesz skasować aplikację $app_name ze swojego komputera? [T/n]"
+aun_remove="Usuń aplikację $app_name ze swojego komputera."
+no_connect="Brak połączenia z Internetem. \nPrzerwano."
+answer_time="Podaj w godzinach częstotliwość wyszukiwania aktualizacji." 
+time_empty="Częstotliwość wyszukiwania aktualizacji nie została zmieniona."
+#parameters
+help='Wyświetl treść pomocy.'
+ver_info='Wyświetl wersję programu.'
+update_info='Sprawdź dostępne aktualizacje programu.'
+author_info='Wyświetl informacje o autorze programu.'
+version_info='Wersja programu:'
+error_unknown_option_text="$app_name_styl: Nieznana opcja '$1'\nWykonaj '$app_name_male --help'  dla uzyskania informacji."
+install_info="Zainstaluj program $app_name."
+change_time="Zmień częstotliwość wyszukiwania nowszej wersji jądra."
