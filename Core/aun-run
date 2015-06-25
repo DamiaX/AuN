@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#Copyright © 2015 Damian Majchrzak (DamiaX)
+#http://damiax.github.io/AuN/
+
+temp=".temp";
+ps -e | grep 'aun-init' >$temp
+
+if [ -s $temp ]
+ then
+killall 'sleep';
+killall aun-init
+rm -rf $temp;
+else
+rm -rf $temp;
+fi
+aun-init;
