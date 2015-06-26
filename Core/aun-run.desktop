@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Application
-Exec=arch-update
+Exec=aun-run
 Terminal=false
 Type=Application
 StartupNotify=false
