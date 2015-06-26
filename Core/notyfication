@@ -1,0 +1,8 @@
+#!/bin/bash
+messages="AuN.messages"
+dir="$HOME/.AuN_data"
+
+if [ -e "$dir/$messages" ] ; then
+notify-send "Test";
+rm -rf $dir/$messages";
+fi
