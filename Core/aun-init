@@ -4,8 +4,10 @@
 #http://damiax.github.io/AuN/
 
 arch-update;
+aun-notification;
 
 for (( i=1; $i <= 2; )) ; do
 sleep 3600;
 arch-update;
+aun-notification;
 done;
