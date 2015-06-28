@@ -1,7 +1,6 @@
 #!/bin/bash
 
 #Copyright © 2015 Damian Majchrzak (DamiaX)
-#Automatic Ubuntu, Debian, elementary OS and Linux Mint kernel updater.
 #https://github.com/DamiaX/AuN/
 
 version="0.1";
@@ -46,18 +45,13 @@ chmod 777 $autostart_dir;
 fi
 
 if [ -e $app_dir ] ; then
-chmod 777 $app_dir/$app;
-chmod 777 "$app_dir/aun-*";
+chmod 777 $app_dir;
 fi
 
 if [ -e $app_dir/$app ] ; then
 chmod 777 $app_dir/$app;
+chmod 777 $app_dir/aun*;
 fi
-
-if [ -e $app_dir/aun-* ] ; then
-chmod 777 $app_dir/aun-*;
-fi
-
 }
 
 create_app_data()
@@ -239,7 +233,7 @@ install_app()
 create_app_data;
 cp $0 $app_dir/$app
 check_success_install;
-cp "$app.*.lang" $app_dir
+cp aun* $app_dir
 check_success_install;
 
 echo "test"
@@ -265,7 +259,7 @@ check_success_install;
 if [ $? -eq 0 ]
     then
 print_text 33 "=> $install_ok";
-echo -e "\E[37;1m=> $run\033[0m" "\E[35;1msudo $app_name_male\033[0m";
+echo -e "\E[37;1m=> $run\033[0m" "\E[35;1m$app_name_male\033[0m";
 fi
 }
 
