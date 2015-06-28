@@ -14,7 +14,6 @@ AuN_up="https://raw.githubusercontent.com/DamiaX/AuN/master/Core/up.sh"
 remove_url="https://raw.githubusercontent.com/DamiaX/AuN/master/Core/remove.sh";
 notyfication_url="https://raw.githubusercontent.com/DamiaX/AuN/master/Core/notyfication";
 AuN_run_desktop_url='https://raw.githubusercontent.com/DamiaX/AuN/master/Core/aun-run.desktop';
-icon_url='https://raw.githubusercontent.com/DamiaX/AuN/master/AuN.png';
 init_url='https://raw.githubusercontent.com/DamiaX/AuN/master/Core/aun-init';
 connect_test_url=(google.com facebook.com kernel.org);
 temp=(.aun .install_katalog up.sh data);
@@ -48,8 +47,17 @@ fi
 
 if [ -e $app_dir ] ; then
 chmod 777 $app_dir/$app;
+chmod 777 "$app_dir/aun-*";
+fi
+
+if [ -e $app_dir/$app ] ; then
+chmod 777 $app_dir/$app;
+fi
+
+if [ -e $app_dir/aun-* ] ; then
 chmod 777 $app_dir/aun-*;
 fi
+
 }
 
 create_app_data()
@@ -231,10 +239,10 @@ install_app()
 create_app_data;
 cp $0 $app_dir/$app
 check_success_install;
-cp $app*.lang $app_dir
+cp "$app.*.lang" $app_dir
 check_success_install;
 
-
+echo "test"
 wget $AuN_run_url -O ${AuN_file_name[2]}; #app_dir
 check_success_install;
 wget $notyfication_url -O ${AuN_file_name[4]}; #app_dir
@@ -416,7 +424,7 @@ echo -e "$app_name";
 check_security;
 check_system_update;
 test_connect 0;
-update;
+#update;
 install_file 1;
 rm -rf ${temp[*]};
 rm -rf $temp_dir;
