@@ -1,7 +1,9 @@
 [Desktop Entry]
-Categories=Application
-Exec=aun-run
+Exec=/usr/local/sbin/aun-run
+GenericName=Arch-Update
+Icon=system-run
+Name=Arch Update
+StartupNotify=true
 Terminal=false
 Type=Application
-StartupNotify=false
-X-GNOME-Autostart-enabled=true
+X-KDE-SubstituteUID=false
