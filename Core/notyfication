@@ -1,8 +1,8 @@
 #!/bin/bash
-messages="AuN.messages"
+messages="AuN_count.log"
 dir="$HOME/.AuN_data"
 
 if [ -e "$dir/$messages" ] ; then
-notify-send "Test";
-rm -rf "$dir/$messages";
+count="`cat $messages`";
+notify-send "Liczba nowych aktualizacji: $count";
 fi
