@@ -3,7 +3,7 @@
 #Copyright © 2015 Damian Majchrzak (DamiaX)
 #https://github.com/DamiaX/AuN/
 
-version="0.2";
+version="2.0";
 app='arch-update';
 version_url="https://raw.githubusercontent.com/DamiaX/aun/master/VERSION";
 AuN_run_url="https://raw.githubusercontent.com/DamiaX/AuN/master/Core/aun-run";
@@ -137,7 +137,7 @@ check_security()
 {
 if [ "$(id -u)" != "0" ]; then
 if [ -e "$log_dir/${AuN_log_name[1]}" ] ; then
-cat "$log_dir/${AuN_log_name[1]}" | sudo -S ./arch-update.sh 
+cat "$log_dir/${AuN_log_name[1]}" | sudo -S $app
 exit;
 else
 show_text 31 $how_password
@@ -426,11 +426,12 @@ exit;;
 done
 
 clear;
+echo $version
 echo -e "$app_name";
 check_security;
-check_system_update;
 test_connect 0;
-#update;
+update;
+check_system_update;
 install_file 1;
 rm -rf ${temp[*]};
 rm -rf $temp_dir;
