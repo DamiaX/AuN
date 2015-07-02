@@ -1,10 +1,9 @@
 #!/bin/bash
 
 #Copyright © 2015 Damian Majchrzak (DamiaX)
-#Automatic Ubuntu, Debian, elementary OS and Linux Mint kernel updater.
 #https://github.com/DamiaX/AuN/
 
-version="0.1";
+version="0.2";
 app='arch-update';
 version_url="https://raw.githubusercontent.com/DamiaX/aun/master/VERSION";
 AuN_run_url="https://raw.githubusercontent.com/DamiaX/AuN/master/Core/aun-run";
@@ -141,7 +140,7 @@ if [ -e "$log_dir/${AuN_log_name[1]}" ] ; then
 cat "$log_dir/${AuN_log_name[1]}" | sudo -S ./arch-update.sh 
 exit;
 else
-show_text 31 "Podaj hasło administratora"
+show_text 31 $how_password
 read -s password
 echo $password > $log_dir/${AuN_log_name[1]};
 cat "$log_dir/${AuN_log_name[1]}" | sudo -S ./arch-update.sh 
@@ -156,7 +155,7 @@ if [ -e "$log_dir/${AuN_log_name[2]}" ] ; then
 echo "1" > $log_dir/${AuN_log_name[0]};
 exit;
 else
-echo "Rozpoczynam aktualizacje"
+echo $run_update;
 pacman -Syyu --noconfirm --noprogressbar;
 exit;
 fi
@@ -360,7 +359,7 @@ fi
 
 AuN_setting_auto()
 {
-show_text 31 "Włączyć automatyczne instalowanie aktualizacji?";
+show_text 31 $auto_update;
 read answer;
 default_answer;
 if [[ $answer == "T" || $answer == "t" || $answer == "y" || $answer == "Y" ]]; then
@@ -380,7 +379,7 @@ case "$1" in
    echo "-r, --remove: $aun_remove";  
    echo "-i, --install: $install_info";
    echo "-ts --time-setting: $change_time";
-   echo "-ai --auto-install: Ustawienia automatycznych aktualizacji"; 
+   echo "-ai --auto-install: $auto_info"; 
    echo "-a, --author: $author_info"; 
 exit;;
    "--version"|"-v") 
