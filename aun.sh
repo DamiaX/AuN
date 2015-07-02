@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #Copyright © 2015 Damian Majchrzak (DamiaX)
+#Automatic Ubuntu, Debian, elementary OS and Linux Mint kernel updater.
 #https://github.com/DamiaX/AuN/
 
 version="0.1";
@@ -18,7 +19,7 @@ connect_test_url=(google.com facebook.com kernel.org);
 temp=(.aun .install_katalog up.sh data);
 AuN_file_name=(aun-init remove.sh aun-run aun-run.desktop aun-notification);
 AuN_lang_name=(aun.pl.lang aun.en.lang);
-AuN_log_name=(AuN.messages AuN.password AuN_setting.log);
+AuN_log_name=(AuN.messages AuN.password AuN_setting.log AuN_count.log);
 app_dir='/usr/local/sbin';
 actual_dir="$(pwd)";
 temp_dir="$actual_dir/.AuN_temp_dir";
@@ -161,11 +162,23 @@ exit;
 fi
 }
 
+remove_empty()
+{
+
+if [[ ! -s $log_dir/${AuN_log_name[3]} ]] && [[ -f $log_dir/${AuN_log_name[3]} ]] && [[ ! -L $log_dir/${AuN_log_name[3]} ]]
+        then
+                rm -rf $log_dir/${AuN_log_name[3]};
+        fi
+}
+
 check_system_update()
 {
 pacman -Sy
-pacman -Su -p >${temp[0]};
-grep "http://" ${temp[0]} -q;
+pacman -Su -p > ${temp[0]};
+grep "http://" ${temp[0]} > $log_dir/${AuN_log_name[3]} -q;
+echo "`cat -n $log_dir/${AuN_log_name[3]} | tail -1 | awk '{print $1}'`" > $log_dir/${AuN_log_name[3]};
+sed -i '/^$/d' $log_dir/${AuN_log_name[3]};
+remove_empty;
 
 if [ $? = 0 ]
 then      
@@ -259,7 +272,7 @@ check_success_install;
 if [ $? -eq 0 ]
     then
 print_text 33 "=> $install_ok";
-echo -e "\E[37;1m=> $run\033[0m" "\E[35;1m$app_name_male\033[0m";
+echo -e "\E[37;1m=> $run\033[0m" "\E[35;1msudo $app_name_male\033[0m";
 fi
 }
 
