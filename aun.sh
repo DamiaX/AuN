@@ -3,7 +3,7 @@
 #Copyright © 2015 Damian Majchrzak (DamiaX)
 #https://github.com/DamiaX/AuN/
 
-version="2.0";
+version="3.0";
 app='arch-update';
 version_url="https://raw.githubusercontent.com/DamiaX/aun/master/VERSION";
 AuN_run_url="https://raw.githubusercontent.com/DamiaX/AuN/master/Core/aun-run";
@@ -245,17 +245,14 @@ install_app()
 create_app_data;
 cp $0 $app_dir/$app
 check_success_install;
-cp aun* $app_dir
-check_success_install;
 
-echo "test"
-wget $AuN_run_url -O ${AuN_file_name[2]}; #app_dir
+wget -q $AuN_run_url -O ${AuN_file_name[2]}; #app_dir
 check_success_install;
-wget $notyfication_url -O ${AuN_file_name[4]}; #app_dir
+wget -q $notyfication_url -O ${AuN_file_name[4]}; #app_dir
 check_success_install;
-wget $AuN_run_desktop_url -O ${AuN_file_name[3]}; #autostart_dir
+wget -q $AuN_run_desktop_url -O ${AuN_file_name[3]}; #autostart_dir
 check_success_install;
-wget $init_url -O ${AuN_file_name[0]}; #app_dir
+wget -q $init_url -O ${AuN_file_name[0]}; #app_dir
 check_success_install;
 mv ${AuN_file_name[0]} $app_dir;
 check_success_install;
