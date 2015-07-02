@@ -3,7 +3,7 @@
 #Copyright © 2015 Damian Majchrzak (DamiaX)
 #https://github.com/DamiaX/AuN/
 
-version="4.0";
+version="4.1";
 app='arch-update';
 version_url="https://raw.githubusercontent.com/DamiaX/aun/master/VERSION";
 AuN_run_url="https://raw.githubusercontent.com/DamiaX/AuN/master/Core/aun-run";
@@ -268,7 +268,7 @@ check_success_install;
 if [ $? -eq 0 ]
     then
 print_text 33 "=> $install_ok";
-echo -e "\E[37;1m=> $run\033[0m" "\E[35;1msudo $app_name_male\033[0m";
+echo -e "\E[37;1m=> $run\033[0m" "\E[35;1m$app_name_male\033[0m";
 fi
 }
 
