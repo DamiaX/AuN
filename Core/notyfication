@@ -3,6 +3,7 @@ messages="AuN_count.log"
 dir="$HOME/.AuN_data"
 
 if [ -e "$dir/$messages" ] ; then
-count="`cat $messages`";
-notify-send "Liczba nowych aktualizacji: $count";
+count="`cat $dir/$messages`";
+notify-send "Arch Update" "Liczba nowych aktualizacji: $count";
 fi
+rm -rf  "$dir/$messages";
