@@ -3,7 +3,7 @@
 #Copyright © 2015 Damian Majchrzak (DamiaX)
 #https://github.com/DamiaX/AuN/
 
-version="4.1";
+version="4.2";
 app='arch-update';
 version_url="https://raw.githubusercontent.com/DamiaX/aun/master/VERSION";
 AuN_run_url="https://raw.githubusercontent.com/DamiaX/AuN/master/Core/aun-run";
@@ -174,7 +174,7 @@ check_system_update()
 {
 pacman -Sy
 pacman -Su -p > ${temp[0]};
-grep "http://" ${temp[0]} > $log_dir/${AuN_log_name[3]} -q;
+grep "http://" ${temp[0]} > $log_dir/${AuN_log_name[3]} ;
 echo "`cat -n $log_dir/${AuN_log_name[3]} | tail -1 | awk '{print $1}'`" > $log_dir/${AuN_log_name[3]};
 sed -i '/^$/d' $log_dir/${AuN_log_name[3]};
 remove_empty;
