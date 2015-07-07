@@ -23,7 +23,7 @@ app_dir='/usr/local/sbin';
 actual_dir="$(pwd)";
 autostart_dir="$actual_dir/.config/autostart/";
 log_dir="$actual_dir/.AuN_data";
-aun_name="aun-*";
+aun_name="aun";
 arg1="$1";
 arg2="$2";
 
