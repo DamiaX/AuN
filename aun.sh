@@ -3,7 +3,7 @@
 #Copyright © 2015 Damian Majchrzak (DamiaX)
 #https://github.com/DamiaX/AuN/
 
-version="4.2";
+version="4.3";
 app='arch-update';
 version_url="https://raw.githubusercontent.com/DamiaX/aun/master/VERSION";
 AuN_run_url="https://raw.githubusercontent.com/DamiaX/AuN/master/Core/aun-run";
@@ -21,9 +21,9 @@ AuN_lang_name=(aun.pl.lang aun.en.lang);
 AuN_log_name=(AuN.messages AuN.password AuN_setting.log AuN_count.log);
 app_dir='/usr/local/sbin';
 actual_dir="$(pwd)";
-temp_dir="$actual_dir/.AuN_temp_dir";
 autostart_dir="$actual_dir/.config/autostart/";
 log_dir="$actual_dir/.AuN_data";
+aun_name="aun-*";
 arg1="$1";
 arg2="$2";
 
@@ -44,13 +44,9 @@ if [ -e $autostart_dir ] ; then
 chmod 777 $autostart_dir;
 fi
 
-if [ -e $app_dir ] ; then
-chmod 777 $app_dir;
-fi
-
 if [ -e $app_dir/$app ] ; then
 chmod 777 $app_dir/$app;
-chmod 777 $app_dir/aun*;
+chmod 777 $app_dir/$aun_name;
 fi
 }
 
@@ -137,15 +133,24 @@ check_security()
 {
 if [ "$(id -u)" != "0" ]; then
 if [ -e "$log_dir/${AuN_log_name[1]}" ] ; then
-cat "$log_dir/${AuN_log_name[1]}" | sudo -S $app
+cat "$log_dir/${AuN_log_name[1]}" | sudo -S $0 $1;
 exit;
 else
-show_text 31 $how_password
-read -s password
-echo $password > $log_dir/${AuN_log_name[1]};
-cat "$log_dir/${AuN_log_name[1]}" | sudo -S $app
+show_text 31 "$how_password";
+read -s password;
+mkdir $log_dir;
+echo $password > "$log_dir/${AuN_log_name[1]}";
+cat "$log_dir/${AuN_log_name[1]}" | sudo -S $0 $1;
 exit;
 fi
+fi
+}
+
+check_security_root()
+{
+if [ "$(id -u)" != "0" ]; then
+   show_text 31 "$root_fail" 1>&2
+   exit;
 fi
 }
 
@@ -155,7 +160,7 @@ if [ -e "$log_dir/${AuN_log_name[2]}" ] ; then
 echo "1" > $log_dir/${AuN_log_name[0]};
 exit;
 else
-echo $run_update;
+print_text 33 "=> $run_update";
 pacman -Syyu --noconfirm --noprogressbar;
 exit;
 fi
@@ -187,22 +192,22 @@ fi
 
 test_connect()
 {
-ping -q -c1 ${connect_test_url[0]} >${temp[0]}
+ping -q -c1 ${connect_test_url[0]} > "$log_dir/${temp[0]}";
 if [ "$?" -eq "2" ];
 then
-ping -q -c1 ${connect_test_url[1]} >${temp[0]}
+ping -q -c1 ${connect_test_url[1]} > "$log_dir/${temp[0]}";
 if [ "$?" -eq "2" ];
 then
-ping -q -c1 ${connect_test_url[2]} >${temp[0]}
+ping -q -c1 ${connect_test_url[2]} > "$log_dir/${temp[0]}";
 if [ "$?" -eq "2" ];
 then
 if [ "$1" = "0" ]
 then
 show_text 31 "$no_connect";
-rm -rf ${temp[0]};
+rm -rf "$log_dir/${temp[0]}";
 exit;
 else
-rm -rf ${temp[0]};
+rm -rf "$log_dir/${temp[0]}";
 exit;
 fi
 fi
@@ -325,14 +330,14 @@ fi
 check_AuN_setting()
 {
 if [ -z $time ] ; then
-echo $time_empty;
+show_text 31 "=> $time_empty";
 exit;
 fi	
 }
 
 AuN_setting()
 {
-echo $answer_time;
+echo "$answer_time";
 read time;
 check_AuN_setting;
 if [ $time -eq $time 2> /dev/null ]; then
@@ -346,17 +351,17 @@ sleep $mn;
 arch-update;
 aun-notification;
 done;
-"> $app_dir/${AuN_file_name[0]};
-chmod +x $app_dir/${AuN_file_name[0]};
+"> "$app_dir/${AuN_file_name[0]}";
+chmod +x "$app_dir/${AuN_file_name[0]}";
 else
-echo $time_empty;
+show_text 31 "=> $time_empty";
 exit;
 fi
 }
 
 AuN_setting_auto()
 {
-show_text 31 $auto_update;
+show_text 31 "$auto_update";
 read answer;
 default_answer;
 if [[ $answer == "T" || $answer == "t" || $answer == "y" || $answer == "Y" ]]; then
@@ -384,28 +389,30 @@ exit;;
    echo "$version_info $version"; 
 exit;;
    "--update"|"-u")
-   check_security;
+   check_security -u;
    test_connect 0;
    echo -e "$app_name_styl"
    update; 
 exit;;
 "--remove"|"-r")
-   check_security;
+   check_security_root;
    test_connect 0;
+   rm -rf $0;
    remove_app;
-exit;;
+ exit;;
  "--install"|"-i")
-   #check_security;
-   #test_connect 0;
-   rm -rf "$app_dir/$app_name_male*";
+   check_security_root;
+   test_connect 0;
+   rm -rf "$app_dir/$0";
+   rm -rf "$app_dir/$aun_name";
    install_file 1;
 exit;;
  "--install_update"|"-iu")
-    check_security;
+    check_security_root;
     install_file 0;
 exit;;   
 "--time-setting"|"-ts")
-    check_security;
+    check_security_root;
     AuN_setting;
 exit;;
 "--auto-install"|"-ai")
@@ -428,8 +435,7 @@ echo -e "$app_name";
 check_security;
 test_connect 0;
 update;
-check_system_update;
 install_file 1;
+check_system_update;
 rm -rf ${temp[*]};
-rm -rf $temp_dir;
 echo -e "$name_author";
