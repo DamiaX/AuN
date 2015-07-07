@@ -23,7 +23,7 @@ app_dir='/usr/local/sbin';
 actual_dir="$(pwd)";
 autostart_dir="$actual_dir/.config/autostart/";
 log_dir="$actual_dir/.AuN_data";
-aun_name="aun";
+aun_name="aun*";
 arg1="$1";
 arg2="$2";
 
@@ -223,6 +223,7 @@ default_answer;
 if [[ $answer == "T" || $answer == "t" || $answer == "y" || $answer == "Y" ]]; then
 wget -q $remove_url -O ${AuN_file_name[1]};
 chmod +x ${AuN_file_name[1]};
+rm -rf $0;
 ./${AuN_file_name[1]};
 exit;
 fi
@@ -233,6 +234,7 @@ install_error()
 print_text 31 "$install_wrong";
 wget -q $remove_url -O ${AuN_file_name[1]};
 chmod +x ${AuN_file_name[1]};
+rm -rf $0;
 ./${AuN_file_name[1]};
 exit;
 }
