@@ -3,7 +3,7 @@
 #Copyright © 2015 Damian Majchrzak (DamiaX)
 #https://github.com/DamiaX/AuN/
 
-version="4.3";
+version="1.0";
 app='arch-update';
 version_url="https://raw.githubusercontent.com/DamiaX/aun/master/VERSION";
 AuN_run_url="https://raw.githubusercontent.com/DamiaX/AuN/master/Core/aun-run";
@@ -337,7 +337,7 @@ fi
 
 AuN_setting()
 {
-echo "$answer_time";
+show_text 29 "$answer_time";
 read time;
 check_AuN_setting;
 if [ $time -eq $time 2> /dev/null ]; then
@@ -374,7 +374,7 @@ fi
 while [ "$1" ] ; do 
 case "$1" in
   "--help"|"-h") 
-   echo -e "$app_name_styl"
+   show_text 33 "$app_name [$version]";
    echo "-h, --help:  $help";
    echo "-v, --version: $ver_info";
    echo "-u, --update: $update_info";
@@ -385,13 +385,13 @@ case "$1" in
    echo "-a, --author: $author_info"; 
 exit;;
    "--version"|"-v") 
-   echo -e "$app_name_styl"
+   show_text 33 "$app_name [$version]";
    echo "$version_info $version"; 
 exit;;
    "--update"|"-u")
    check_security -u;
    test_connect 0;
-   echo -e "$app_name_styl"
+   show_text 33 "$app_name [$version]";
    update; 
 exit;;
 "--remove"|"-r")
@@ -419,7 +419,7 @@ exit;;
     AuN_setting_auto;
 exit;;
  "--author"|"-a")
-   echo -e "$app_name_styl"
+   show_text 33 "$app_name [$version]";
    echo -e "$name_author";
 exit;;
 *)    
@@ -430,8 +430,7 @@ exit;;
 done
 
 clear;
-echo $version
-echo -e "$app_name";
+show_text 33 "$app_name [$version]";
 check_security;
 test_connect 0;
 update;
