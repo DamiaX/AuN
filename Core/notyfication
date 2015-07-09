@@ -1,9 +1,45 @@
 #!/bin/bash
-messages="AuN_count.log"
-dir="$HOME/.AuN_data"
+AuN_lang_name=(aun.pl.lang aun.en.lang);
+app_dir='/usr/local/sbin';
+messages="AuN_count.log";
+dir="$HOME/.AuN_data";
+setting="AuN_show.log";
+
+lang_init_pl()
+{
+if [ -e $app_dir/${AuN_lang_name[0]} ] ; then
+source $app_dir/${AuN_lang_name[0]};
+else
+source ${AuN_lang_name[0]};
+fi
+}
+
+lang_init_en()
+{
+if [ -e $app_dir/${AuN_lang_name[1]} ] ; then
+source $app_dir/${AuN_lang_name[1]};
+else
+source ${AuN_lang_name[1]};
+fi
+}
+
+case $LANG in
+*PL*) 
+lang_init_pl;
+ ;;
+*) 
+lang_init_en;
+ ;;
+esac
 
 if [ -e "$dir/$messages" ] ; then
 count="`cat $dir/$messages`";
-notify-send "Arch Update" "Liczba nowych aktualizacji: $count";
+if [ -e "$dir/$setting" ] ; then
+notify-send "$app_name" "$count_install $count";
+exit;
 fi
+notify-send "$app_name" "$count_update $count";
+fi
+
 rm -rf  "$dir/$messages";
+rm -rf "$dir/$setting"; 
