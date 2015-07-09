@@ -20,6 +20,7 @@ aun_remove="Usuń aplikację $app_name ze swojego komputera."
 no_connect="Brak połączenia z Internetem. \nPrzerwano."
 answer_time="Podaj w godzinach częstotliwość wyszukiwania aktualizacji." 
 time_empty="Częstotliwość wyszukiwania aktualizacji nie została zmieniona."
+
 #parameters
 help='Wyświetl treść pomocy.'
 ver_info='Wyświetl wersję programu.'
@@ -33,3 +34,7 @@ auto_update="Włączyć automatyczne instalowanie aktualizacji? [T/n]"
 run_update="Rozpoczynam aktualizacje..."
 how_password="Podaj hasło administratora..."
 change_time="Zmień ustawienia wyszukiwania nowych aktualizacji."
+
+#notyfication
+count_install='Liczba zainstalowanych aktualizacji:'
+count_update='Liczba nowych aktualizacji:'
