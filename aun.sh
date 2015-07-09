@@ -3,7 +3,7 @@
 #Copyright © 2015 Damian Majchrzak (DamiaX)
 #https://github.com/DamiaX/AuN/
 
-version="1.0";
+version="1.1";
 app='arch-update';
 version_url="https://raw.githubusercontent.com/DamiaX/aun/master/VERSION";
 AuN_run_url="https://raw.githubusercontent.com/DamiaX/AuN/master/Core/aun-run";
@@ -18,7 +18,7 @@ connect_test_url=(google.com facebook.com kernel.org);
 temp=(.aun .install_katalog up.sh data);
 AuN_file_name=(aun-init remove.sh aun-run aun-run.desktop aun-notification);
 AuN_lang_name=(aun.pl.lang aun.en.lang);
-AuN_log_name=(AuN.messages AuN.password AuN_setting.log AuN_count.log);
+AuN_log_name=(AuN.messages AuN.password AuN_setting.log AuN_count.log AuN_show.log);
 app_dir='/usr/local/sbin';
 actual_dir="$(pwd)";
 autostart_dir="$actual_dir/.config/autostart/";
@@ -162,6 +162,12 @@ exit;
 else
 print_text 33 "=> $run_update";
 pacman -Syyu --noconfirm --noprogressbar;
+
+if [ $? != 0 ]
+then 
+echo "1" > $log_dir/${AuN_log_name[4]};
+fi
+
 exit;
 fi
 }
