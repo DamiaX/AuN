@@ -3,7 +3,7 @@
 #Copyright © 2015 Damian Majchrzak (DamiaX)
 #https://github.com/DamiaX/AuN/
 
-version="1.1";
+version="1.2";
 app='arch-update';
 version_url="https://raw.githubusercontent.com/DamiaX/aun/master/VERSION";
 AuN_run_url="https://raw.githubusercontent.com/DamiaX/AuN/master/Core/aun-run";
@@ -129,6 +129,17 @@ show_text()
  	echo ""
 }
 
+clear_data()
+{
+if [ -e $log_dir/${AuN_log_name[3]} ] ; then
+rm -rf $log_dir/${AuN_log_name[3]};
+fi
+
+if [ -e $log_dir/${AuN_log_name[4]} ] ; then
+rm -rf $log_dir/${AuN_log_name[4]};
+fi
+}
+
 check_security()
 {
 if [ "$(id -u)" != "0" ]; then
@@ -162,12 +173,10 @@ exit;
 else
 print_text 33 "=> $run_update";
 pacman -Syyu --noconfirm --noprogressbar;
-
-if [ $? != 0 ]
+if [ $? = 0 ]
 then 
 echo "1" > $log_dir/${AuN_log_name[4]};
 fi
-
 exit;
 fi
 }
@@ -440,6 +449,7 @@ done
 clear;
 show_text 33 "$app_name [$version]";
 check_security;
+clear_data;
 test_connect 0;
 update;
 install_file 1;
