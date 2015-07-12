@@ -40,6 +40,3 @@ exit;
 fi
 notify-send "$app_name" "$count_update $count";
 fi
-
-rm -rf  "$dir/$messages";
-rm -rf "$dir/$setting"; 
