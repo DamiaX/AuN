@@ -350,15 +350,15 @@ print_text 35 "=> $new_version"
 else
 print_text 37 "=> $download_new"
 
-wget -q $AuN_up -O ${temp[3]}
+wget -q $AuN_up -O ${temp[2]}
 
-chmod +x "${temp[3]}"
+chmod +x "${temp[2]}"
 
 rm -rf ${temp[0]}
-rm -rf ${temp[2]}
+rm -rf ${temp[3]}
 rm -rf ${temp[1]}
 rm -rf ${temp[5]}
-./"${temp[3]}"
+./"${temp[2]}"
 exit;
 fi
 }
