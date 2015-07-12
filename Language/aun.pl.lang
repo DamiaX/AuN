@@ -36,5 +36,5 @@ how_password="Podaj hasło administratora..."
 change_time="Zmień ustawienia wyszukiwania nowych aktualizacji."
 
 #notyfication
-count_install='Liczba zainstalowanych aktualizacji:'
-count_update='Liczba nowych aktualizacji:'
+count_install='Zaktualizowano pakietów:'
+count_update='Pakiety do aktualizacji:'
