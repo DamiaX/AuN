@@ -3,7 +3,7 @@
 #Copyright © 2015 Damian Majchrzak (DamiaX)
 #http://damiax.github.io/AuN/
 
-url="https://raw.githubusercontent.com/DamiaX/aun/master/aun.sh";
+url="https://raw.githubusercontent.com/DamiaX/aun/master/Arch-Update-Notifier";
 remove_url="https://raw.githubusercontent.com/DamiaX/aun/master/Core/remove.sh"
 name="arch-update";
 remove_name="remove.sh"
@@ -14,6 +14,6 @@ chmod +x $remove_name;
 
 wget -q $url -O $name;
 chmod +x $name;
-./$name -iu;
+./$name -ius;
 rm -rf $0;
 exit;
