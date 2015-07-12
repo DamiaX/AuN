@@ -1,0 +1,39 @@
+#Copyright © 2015 Damian Majchrzak (DamiaX)
+app_name='Arch-Update'
+app_name_male='arch-update'
+app_name_styl="\E[33;1m$app_name [$version]\033[0m"
+aun_remove="Remove Application $app_name from your computer."
+root_fail='Root permissions are required.'
+instalation_close='Installation completed.'
+install_file="Install $app_name? [Y/n]"
+install_ok='Installation completed!'
+run='Starting the program:'
+author='Author program:'
+name='Damian Majchrzak (DamiaX).'
+name_author="\E[33;1m$author\033[0m $name"
+new_version="Checking the version $app_name..."
+download_new="Download a newer version of $app_name..."
+install_wrong='Copying files failed...'
+instalation_error='Updating system failed...'
+answer_remove="Are you sure you want to delete the application $app_name from your computer? [Y/n]"
+aun_remove="Remove Application $app_name from your computer."
+no_connect="No connection to the Internet. \nAborting."
+answer_time="Enter a frequency search for updates." 
+time_empty="Search frequency updates has not been changed."
+#parameters
+help='View the content of help.'
+ver_info='Display the version of the program.'
+update_info='Check the available updates.'
+author_info='Display information about the author of the program.'
+version_info='Version of the program:'
+error_unknown_option_text="$app_name_styl: Unknown option '$1'\nFollow '$app_name_male --help'  for more information."
+install_info="Install $app_name"
+auto_info="Settings for automatic updates."
+auto_update="Turn on the automatic installation of updates? [Y/n]"
+run_update="Starting updates..."
+how_password="Enter the administrator password..."
+change_time="Change the search time settings for new updates."
+
+#notyfication
+count_install='Updated packages:'
+count_update='Packages to update:'
