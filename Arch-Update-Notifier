@@ -3,7 +3,7 @@
 #Copyright © 2015 Damian Majchrzak (DamiaX)
 #https://github.com/DamiaX/AuN/
 
-version="1.1";
+version="1.2";
 app='arch-update';
 version_url="https://raw.githubusercontent.com/DamiaX/aun/master/VERSION";
 AuN_run_url="https://raw.githubusercontent.com/DamiaX/AuN/master/Core/aun-run";
@@ -188,6 +188,7 @@ manual_chose()
 {
 if [ -e "$log_dir/${AuN_log_name[2]}" ] ; then
 echo "1" > $log_dir/${AuN_log_name[0]};
+rm -rf ${temp[*]};
 exit;
 else
 print_text 33 "=> $run_update";
@@ -196,6 +197,7 @@ if [ $? = 0 ]
 then 
 echo "1" > $log_dir/${AuN_log_name[4]};
 fi
+rm -rf ${temp[*]};
 exit;
 fi
 }
@@ -477,5 +479,4 @@ update;
 install_file 1;
 check_module;
 check_system_update;
-rm -rf ${temp[*]};
 echo -e "$name_author";
