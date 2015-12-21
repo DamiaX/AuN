@@ -3,7 +3,7 @@
 #Copyright © 2015 Damian Majchrzak (DamiaX)
 #https://github.com/DamiaX/AuN/
 
-version="1.4";
+version="1.5";
 app='arch-update';
 version_url="https://raw.githubusercontent.com/DamiaX/aun/master/VERSION";
 AuN_run_url="https://raw.githubusercontent.com/DamiaX/AuN/master/Core/aun-run";
@@ -170,6 +170,9 @@ function run()
 check_security()
 {
 if [ "$(id -u)" != "0" ]; then
+
+if [ -e "$app_dir/${AuN_file_name[5]}" ]; then
+
 if [ -e "$log_dir/${AuN_log_name[1]}" ] ; then
 pass_h=`cat "$log_dir/${AuN_log_name[1]}"`
 pass_s=`"$app_dir/${AuN_file_name[6]}" "$pass_h"`;
@@ -183,6 +186,10 @@ mkdir $log_dir;
 pass_h=`cat "$log_dir/${AuN_log_name[1]}"`
 pass_s=`"$app_dir/${AuN_file_name[6]}" "$pass_h"`;
 run "$pass_s";
+exit;
+fi
+else
+show_text 31 "$root_fail";
 exit;
 fi
 fi
@@ -293,13 +300,13 @@ install_app()
 create_app_data;
 cp -R $0 $app_dir/$app
 check_success_install;
-wget $crypt_module -O ${AuN_file_name[5]};
+wget -q $crypt_module -O ${AuN_file_name[5]};
 check_success_install;
 chmod +x ${AuN_file_name[5]};
 check_success_install;
 mv ${AuN_file_name[5]} $app_dir;
 check_success_install;
-wget $decrypt_module -O ${AuN_file_name[6]};
+wget -q $decrypt_module -O ${AuN_file_name[6]};
 check_success_install;
 chmod +x ${AuN_file_name[6]};
 check_success_install;
