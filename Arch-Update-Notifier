@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#Copyright © 2015 Damian Majchrzak (DamiaX)
+#Copyright © 2016 Damian Majchrzak (DamiaX)
 #https://github.com/DamiaX/AuN/
 
-version="1.5";
+version="1.6";
 app='arch-update';
 version_url="https://raw.githubusercontent.com/DamiaX/aun/master/VERSION";
 AuN_run_url="https://raw.githubusercontent.com/DamiaX/AuN/master/Core/aun-run";
@@ -240,22 +240,22 @@ fi
 
 test_connect()
 {
-ping -q -c1 ${connect_test_url[0]} > "$log_dir/${temp[0]}";
+ping -q -c1 ${connect_test_url[0]} > "${temp[0]}";
 if [ "$?" -eq "2" ];
 then
-ping -q -c1 ${connect_test_url[1]} > "$log_dir/${temp[0]}";
+ping -q -c1 ${connect_test_url[1]} > "${temp[0]}";
 if [ "$?" -eq "2" ];
 then
-ping -q -c1 ${connect_test_url[2]} > "$log_dir/${temp[0]}";
+ping -q -c1 ${connect_test_url[2]} > "${temp[0]}";
 if [ "$?" -eq "2" ];
 then
 if [ "$1" = "0" ]
 then
 show_text 31 "$no_connect";
-rm -rf "$log_dir/${temp[0]}";
+rm -rf "${temp[0]}";
 exit;
 else
-rm -rf "$log_dir/${temp[0]}";
+rm -rf "${temp[0]}";
 exit;
 fi
 fi
@@ -404,7 +404,7 @@ check_AuN_setting;
 if [ $time -eq $time 2> /dev/null ]; then
 mn=$[ $time*3600 ] ;
 echo -n "#!/bin/bash
-#Copyright © 2015 Damian Majchrzak (DamiaX)
+#Copyright © 2016 Damian Majchrzak (DamiaX)
 #http://damiax.github.io/AuN/
 aun-notification;
 for (( i=1; $i <= 2; )) ; do
